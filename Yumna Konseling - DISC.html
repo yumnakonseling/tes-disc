@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tes Kepribadian DISC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --d:#E5484D; --i:#F5A524; --s:#30A46C; --c:#3E63DD;
+  --ink:#1b1d2a; --muted:#6b7086; --line:#e6e8f2; --bg:#f5f6fc; --card:#ffffff;
+  --brand:#5b4bdb; --brand2:#8b5cf6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 400px at 10% -10%, #e9e4ff 0%, transparent 60%),
+    radial-gradient(800px 400px at 100% 0%, #ffe9d6 0%, transparent 55%),
+    var(--bg);
+  min-height:100vh;padding:24px 16px 64px;
+}
+.wrap{max-width:720px;margin:0 auto}
+.hero{text-align:center;padding:24px 8px 20px}
+.dots{display:inline-flex;gap:8px;margin-bottom:14px}
+.dots span{width:38px;height:38px;border-radius:12px;color:#fff;font-weight:800;display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.dots .d{background:var(--d)}.dots .i{background:var(--i)}.dots .s{background:var(--s)}.dots .c{background:var(--c)}
+h1{font-size:clamp(26px,5vw,36px);font-weight:800;letter-spacing:-.02em}
+.hero p{color:var(--muted);margin-top:8px;font-size:15px;line-height:1.6}
+.card{background:var(--card);border-radius:22px;padding:26px;box-shadow:0 10px 40px rgba(60,50,140,.08);border:1px solid var(--line)}
+.progress{margin:18px 0 16px}
+.progress .meta{display:flex;justify-content:space-between;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px}
+.bar{height:10px;background:#e9eaf6;border-radius:99px;overflow:hidden}
+.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:99px;transition:width .4s ease}
+h2{font-size:20px;font-weight:800;margin-bottom:6px}
+.sub{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:20px}
+.field{margin-bottom:16px}
+label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+input[type=text],input[type=number],input[type=date],select{
+  width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;font:inherit;font-size:15px;background:#fafaff;transition:.15s
+}
+input:focus,select:focus{outline:none;border-color:var(--brand);background:#fff;box-shadow:0 0 0 4px rgba(91,75,219,.12)}
+.q{border:1.5px solid var(--line);border-radius:18px;padding:16px;margin-bottom:16px;background:#fcfcff}
+.q.done{border-color:#cfe9db;background:#f7fcf9}
+.q.err{border-color:var(--d);background:#fff7f7}
+.q-title{font-size:13px;font-weight:800;color:var(--brand);margin-bottom:10px;display:flex;justify-content:space-between}
+.legend{display:flex;gap:6px;font-size:11px;font-weight:700;color:var(--muted)}
+.row{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px dashed var(--line)}
+.word{flex:1;font-weight:600;font-size:15px}
+.pick{display:flex;gap:6px}
+.pick button{
+  border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;font:inherit;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:.15s;min-width:64px
+}
+.pick button:hover{border-color:#c5c8e6}
+.pick button.m.on{background:var(--s);border-color:var(--s);color:#fff}
+.pick button.l.on{background:var(--d);border-color:var(--d);color:#fff}
+.nav{display:flex;gap:10px;justify-content:space-between;margin-top:22px}
+.btn{border:0;border-radius:14px;padding:14px 22px;font:inherit;font-weight:700;font-size:15px;cursor:pointer;transition:.15s}
+.btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;box-shadow:0 8px 20px rgba(91,75,219,.3);flex:1}
+.btn.primary:hover{transform:translateY(-1px)}
+.btn.primary:disabled{opacity:.6;cursor:wait;transform:none}
+.btn.ghost{background:#eef0fb;color:var(--ink)}
+.msg{color:var(--d);font-size:13px;font-weight:600;margin-top:12px;display:none}
+.tips{background:#f1efff;border-radius:14px;padding:16px 18px;font-size:14px;line-height:1.7;color:#3d3a73;margin-bottom:20px;border:1px solid #d8d3ff}
+.thanks{text-align:center;padding:12px 0 8px}
+.thanks .check{display:inline-grid;place-items:center;width:84px;height:84px;border-radius:26px;background:var(--s);color:#fff;font-size:44px;font-weight:800;margin-bottom:16px;box-shadow:0 12px 28px rgba(48,164,108,.35)}
+.thanks h2{font-size:24px;margin-bottom:8px}
+.thanks .sub{margin-bottom:0}
+.note{font-size:12px;color:var(--muted);text-align:center;margin-top:20px;line-height:1.6}
+.example-label{font-size:12px;font-weight:700;color:var(--brand);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em}
+.hidden{display:none}
+@media (max-width:480px){.card{padding:18px}.pick button{padding:8px 9px;min-width:56px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="dots"><span class="d">D</span><span class="i">I</span><span class="s">S</span><span class="c">C</span></div>
+    <h1>Yumna Konseling | Tes DISC</h1>
+    <p>Tes ini membutuhkan waktu sekitar 10-15 menit.</p>
+  </header>
+
+  <div class="card" id="app">
+    <div class="progress">
+      <div class="meta"><span id="stepLabel">Data diri</span><span id="pct">0%</span></div>
+      <div class="bar"><div id="barFill"></div></div>
+    </div>
+    <div id="page"></div>
+    <div class="msg" id="msg" role="alert"></div>
+    <div class="nav" id="nav"></div>
+  </div>
+
+  <div class="card hidden" id="result"></div>
+</div>
+
+<script>
+/* ====== PENGATURAN ====== */ 
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxMwV7rHAmD0paS08W_Bs-8P5a2jwl7l9qtCBBDeKwRwV98LdskUyuVKSyNcRX-XcBFNQ/exec";
+
+/* ====== DATA 24 SOAL KUSTOM DISC (Urutan opsi: S, I, D, C) ====== */
+const groups = [
+  [{w:"Gampangan, Mudah setuju",t:"S"}, {w:"Percaya, Mudah percaya pada orang",t:"I"}, {w:"Petualang, Mengambil resiko",t:"D"}, {w:"Toleran, Menghormati",t:"C"}],
+  [{w:"Lembut suara, Pendiam",t:"S"}, {w:"Optimistik, Visioner",t:"I"}, {w:"Pusat Perhatian, Suka gaul",t:"D"}, {w:"Pendamai, Membawa Harmoni",t:"C"}],
+  [{w:"Menyemangati orang",t:"I"}, {w:"Berusaha sempurna",t:"C"}, {w:"Bagian dari kelompok",t:"S"}, {w:"Ingin membuat tujuan",t:"D"}],
+  [{w:"Menjadi frustrasi",t:"D"}, {w:"Menyimpan perasaan saya",t:"S"}, {w:"Menceritakan sisi saya",t:"I"}, {w:"Siap beroposisi",t:"C"}],
+  [{w:"Hidup, Suka bicara",t:"I"}, {w:"Gerak cepat, Tekun",t:"D"}, {w:"Usaha menjaga keseimbangan",t:"S"}, {w:"Usaha mengikuti aturan",t:"C"}],
+  [{w:"Kelola waktu secara efisien",t:"C"}, {w:"Sering terburu-buru, Merasa tertekan",t:"D"}, {w:"Masalah sosial itu penting",t:"S"}, {w:"Suka selesaikan apa yang saya mulai",t:"I"}],
+  [{w:"Tolak perubahan mendadak",t:"S"}, {w:"Cenderung janji berlebihan",t:"I"}, {w:"Tarik diri di tengah tekanan",t:"C"}, {w:"Tidak takut bertempur",t:"D"}],
+  [{w:"Penyemangat yang baik",t:"I"}, {w:"Pendengar yang baik",t:"S"}, {w:"Penganalisa yang baik",t:"C"}, {w:"Delegator yang baik",t:"D"}],
+  [{w:"Hasil adalah penting",t:"D"}, {w:"Lakukan dengan benar, Akurasi penting",t:"C"}, {w:"Dibuat menyenangkan",t:"I"}, {w:"Mari kerjakan bersama",t:"S"}],
+  [{w:"Akan berjalan terus tanpa kontrol diri",t:"I"}, {w:"Akan membeli sesuai dorongan hati",t:"D"}, {w:"Akan menunggu, Tanpa tekanan",t:"S"}, {w:"Akan mengusahakan yang kuinginkan",t:"C"}],
+  [{w:"Ramah, Mudah bergabung",t:"S"}, {w:"Unik, Bosan rutinitas",t:"I"}, {w:"Aktif mengubah sesuatu",t:"D"}, {w:"Ingin hal-hal yang pasti",t:"C"}],
+  [{w:"Non-konfrontasi, Menyerah",t:"S"}, {w:"Dipenuhi hal detail",t:"C"}, {w:"Perubahan pada menit terakhir",t:"I"}, {w:"Menuntut, Kasar",t:"D"}],
+  [{w:"Ingin kemajuan",t:"D"}, {w:"Puas dengan segalanya",t:"S"}, {w:"Terbuka memperlihatkan perasaan",t:"I"}, {w:"Rendah hati, Sederhana",t:"C"}],
+  [{w:"Tenang, Pendiam",t:"S"}, {w:"Bahagia, Tanpa beban",t:"I"}, {w:"Menyenangkan, Baik hati",t:"C"}, {w:"Tak gentar, Berani",t:"D"}],
+  [{w:"Menggunakan waktu berkualitas dgn teman",t:"S"}, {w:"Rencanakan masa depan, Bersiap",t:"C"}, {w:"Bepergian demi petualangan baru",t:"D"}, {w:"Menerima ganjaran atas tujuan yg dicapai",t:"I"}],
+  [{w:"Aturan perlu dipertanyakan",t:"D"}, {w:"Aturan membuat adil",t:"S"}, {w:"Aturan membuat bosan",t:"I"}, {w:"Aturan membuat aman",t:"C"}],
+  [{w:"Pendidikan, Kebudayaan",t:"C"}, {w:"Prestasi, Ganjaran",t:"D"}, {w:"Keselamatan, keamanan",t:"S"}, {w:"Sosial, Perkumpulan kelompok",t:"I"}],
+  [{w:"Memimpin, Pendekatan langsung",t:"D"}, {w:"Suka bergaul, Antusias",t:"I"}, {w:"Dapat diramal, Konsisten",t:"S"}, {w:"Waspada, Hati-hati",t:"C"}],
+  [{w:"Tidak mudah dikalahkan",t:"D"}, {w:"Kerjakan sesuai perintah, Ikut pimpinan",t:"S"}, {w:"Mudah terangsang, Riang",t:"I"}, {w:"Ingin segalanya teratur, Rapi",t:"C"}],
+  [{w:"Saya akan pimpin mereka",t:"D"}, {w:"Saya akan melaksanakan",t:"C"}, {w:"Saya akan meyakinkan mereka",t:"I"}, {w:"Saya dapatkan fakta",t:"S"}],
+  [{w:"Memikirkan orang dahulu",t:"S"}, {w:"Kompetitif, Suka tantangan",t:"D"}, {w:"Optimis, Positif",t:"I"}, {w:"Pemikir logis, Sistematik",t:"C"}],
+  [{w:"Menyenangkan orang, Mudah setuju",t:"S"}, {w:"Tertawa lepas, Hidup",t:"I"}, {w:"Berani, Tak gentar",t:"D"}, {w:"Tenang, Pendiam",t:"C"}],
+  [{w:"Ingin otoritas lebih",t:"D"}, {w:"Ingin kesempatan baru",t:"I"}, {w:"Menghindari konflik",t:"S"}, {w:"Ingin petunjuk yang jelas",t:"C"}],
+  [{w:"Dapat diandalkan, Dapat dipercaya",t:"S"}, {w:"Kreatif, Unik",t:"I"}, {w:"Garis dasar, Orientasi hasil",t:"D"}, {w:"Jalankan standar yang tinggi, Akurat",t:"C"}]
+];
+
+const PER_PAGE=1;
+const pages=[{type:'id'}, {type:'instructions'}];
+for(let p=0;p<groups.length;p+=PER_PAGE) pages.push({type:'q',from:p,to:Math.min(p+PER_PAGE,groups.length)});
+
+const state={page:0,id:null,profile:{nama:'',usia:'',jenis_kelamin:'',tanggal_tes:''},ans:groups.map(()=>({m:null,l:null}))};
+
+const $=id=>document.getElementById(id);
+
+function render(){
+  const pg=pages[state.page];
+  $('msg').style.display='none';
+  
+  if(pg.type==='id') {
+    $('stepLabel').textContent = 'Data diri';
+  } else if(pg.type==='instructions') {
+    $('stepLabel').textContent = 'Instruksi Soal';
+  } else {
+    $('stepLabel').textContent = `Nomor ${pg.from+1} dari ${groups.length}`;
+  }
+  
+  updateProgress();
+
+  if(pg.type==='id'){
+    $('page').innerHTML=`
+      <p class="sub">Silakan isi data diri Anda dengan lengkap dan benar sebelum memulai tes.</p>
+      <div class="field"><label>Nama lengkap *</label><input type="text" id="f_nama" placeholder="Contoh: Siti Aminah" value="${esc(state.profile.nama)}"></div>
+      <div class="field"><label>Usia *</label><input type="number" id="f_usia" placeholder="Contoh: 25" min="1" max="100" value="${esc(state.profile.usia)}"></div>
+      <div class="field">
+        <label>Jenis Kelamin *</label>
+        <select id="f_jk">
+          <option value="" ${!state.profile.jenis_kelamin ? 'selected' : ''} disabled>Pilih Jenis Kelamin</option>
+          <option value="Laki-laki" ${state.profile.jenis_kelamin === 'Laki-laki' ? 'selected' : ''}>Laki-laki</option>
+          <option value="Perempuan" ${state.profile.jenis_kelamin === 'Perempuan' ? 'selected' : ''}>Perempuan</option>
+        </select>
+      </div>
+      <div class="field"><label>Tanggal Tes *</label><input type="date" id="f_tgl" value="${esc(state.profile.tanggal_tes)}"></div>`;
+    $('nav').innerHTML=`<button class="btn primary" onclick="next()">Lanjut ke Instruksi Soal →</button>`;
+  } 
+  else if(pg.type==='instructions'){
+    $('page').innerHTML=`
+      <p class="sub">Harap baca petunjuk di bawah ini dengan cermat sebelum mulai mengerjakan tes.</p>
+      <div class="tips">
+        <b>Cara Mengisi:</b><br>
+        1. Di setiap nomor tes, Anda akan melihat 4 pilihan pernyataan.<br>
+        2. Pilih satu pernyataan yang <b>PALING</b> menggambarkan diri Anda.<br>
+        3. Pilih satu pernyataan yang <b>KURANG</b> menggambarkan diri Anda.<br>
+        4. Kedua pilihan tidak boleh sama.<br>
+        5. Jawablah sesuai kondisi diri Anda yang sebenarnya<br>
+		<br>
+      <div class="q done">
+        <div class="q-title"><span>Contoh</span><span class="legend">✓ Lengkap</span></div>
+        <div class="row">
+          <div class="word">Suka Memimpin</div>
+          <div class="pick"><button class="m on">Paling</button><button class="l">Kurang</button></div>
+        </div>
+        <div class="row">
+          <div class="word">Mudah Bergaul</div>
+          <div class="pick"><button class="m">Paling</button><button class="l on">Kurang</button></div>
+        </div>
+        <div class="row">
+          <div class="word">Berhati-hati</div>
+          <div class="pick"><button class="m">Paling</button><button class="l">Kurang</button></div>
+        </div>
+        <div class="row">
+          <div class="word">Mengikuti Aturan</div>
+          <div class="pick"><button class="m">Paling</button><button class="l">Kurang</button></div>
+        </div>
+      </div>`;
+    $('nav').innerHTML=`<button class="btn ghost" onclick="back()">← Kembali</button><button class="btn primary" onclick="next()">Mulai Tes →</button>`;
+  }
+  else {
+    let h=`<p class="sub"><b>Tandai 1 pernyataan Paling dan 1 pernyataan Kurang yang menggambarkan diri Anda. Kedua pilihan tidak boleh sama.</b></p>`;
+    for(let i=pg.from;i<pg.to;i++) h+=groupHTML(i);
+    $('page').innerHTML=h;
+    const last=state.page===pages.length-1;
+    $('nav').innerHTML=`<button class="btn ghost" onclick="back()">← Kembali</button><button class="btn primary" id="nextBtn" onclick="${last?'submit()':'next()'}">${last?'Kirim Jawaban':'Lanjut →'}</button>`;
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateProgress(){
+  if(pages[state.page].type==='id' || pages[state.page].type==='instructions'){
+    $('pct').textContent='0\%';$('barFill').style.width='0%';
+    return;
+  }
+  const answered=state.ans.filter(a=>a.m!==null&&a.l!==null).length;
+  const pct=Math.round((answered/groups.length)*100);
+  $('pct').textContent=pct+'\%';$('barFill').style.width=pct+'%';
+}
+
+function groupHTML(i){
+  const a=state.ans[i];
+  const done=a.m!==null&&a.l!==null;
+  let h=`<div class="q ${done?'done':''}" id="q${i}"><div class="q-title"><span>Nomor ${i+1} dari ${groups.length}</span><span class="legend">${done?'✓ Lengkap':''}</span></div>`;
+  groups[i].forEach((it,k)=>{
+    h+=`<div class="row"><div class="word">${it.w}</div><div class="pick">
+      <button class="m ${a.m===k?'on':''}" onclick="pick(${i},'m',${k})">Paling</button>
+      <button class="l ${a.l===k?'on':''}" onclick="pick(${i},'l',${k})">Kurang</button></div></div>`;
+  });
+  return h+`</div>`;
+}
+
+function pick(i,role,k){
+  const a=state.ans[i], other=role==='m'?'l':'m';
+  if(a[other]===k) a[other]=null;
+  a[role]=(a[role]===k)?null:k;
+  document.getElementById('q'+i).outerHTML=groupHTML(i);
+  updateProgress();
+}
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function showMsg(t){const m=$('msg');m.textContent=t;m.style.display='block'}
+
+function validatePage(){
+  const pg=pages[state.page];
+  if(pg.type==='id'){
+    const nama=$('f_nama').value.trim();
+    const usia=$('f_usia').value.trim();
+    const jenis_kelamin=$('f_jk').value;
+    const tanggal_tes=$('f_tgl').value.trim();
+
+    state.profile={nama,usia,jenis_kelamin,tanggal_tes};
+
+    if(!nama){showMsg('Nama lengkap wajib diisi.');return false}
+    if(!usia){showMsg('Usia wajib diisi.');return false}
+    if(!jenis_kelamin){showMsg('Jenis kelamin wajib dipilih.');return false}
+    if(!tanggal_tes){showMsg('Tanggal tes wajib diisi.');return false}
+    return true;
+  }
+  
+  if(pg.type==='instructions'){
+    return true;
+  }
+
+  let ok=true,first=null;
+  for(let i=pg.from;i<pg.to;i++){
+    const a=state.ans[i], el=document.getElementById('q'+i);
+    const good=a.m!==null&&a.l!==null;
+    el.classList.toggle('err',!good);
+    if(!good){ok=false;if(first===null)first=el}
+  }
+  if(!ok){showMsg('Pilih 1 pernyataan "Paling" dan 1 pernyataan "Kurang" sebelum lanjut.');first.scrollIntoView({behavior:'smooth',block:'center'})}
+  return ok;
+}
+
+function next(){if(!validatePage())return;state.page++;render()}
+function back(){if(state.page>0){state.page--;render()}}
+
+function makeId(){
+  if(window.crypto&&crypto.randomUUID) return crypto.randomUUID();
+  return Date.now().toString(36)+Math.random().toString(36).slice(2,10);
+}
+
+/* ====== KIRIM JAWABAN ====== */
+async function submit(){
+  if(!validatePage())return;
+  const btn=$('nextBtn');
+  btn.disabled=true;btn.textContent='Mengirim…';
+  $('msg').style.display='none';
+
+  if(!state.id) state.id=makeId();
+
+  const payload={
+    id:state.id,
+    waktu:new Date().toISOString(),
+    nama:state.profile.nama,
+    usia:state.profile.usia,
+    jenis_kelamin:state.profile.jenis_kelamin,
+    tanggal_tes:state.profile.tanggal_tes,
+    jawaban:state.ans.map((a,i)=>({
+      no:i+1,
+      paling:groups[i][a.m].w+' ('+groups[i][a.m].t+')',
+      kurang:groups[i][a.l].w+' ('+groups[i][a.l].t+')'
+    }))
+  };
+
+  if(!SCRIPT_URL){
+    console.log('Mode demo, payload:',payload);
+    showThanks(true);
+    return;
+  }
+
+  const ctrl=new AbortController();
+  const timer=setTimeout(()=>ctrl.abort(),20000);
+  try{
+    const res=await fetch(SCRIPT_URL,{
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify(payload),
+      signal:ctrl.signal
+    });
+    const out=await res.json();
+    if(!out.ok) throw new Error(out.error||'Server menolak data.');
+    showThanks(false);
+  }catch(e){
+    console.error('Gagal mengirim:',e);
+    showMsg('Jawaban belum terkirim. Periksa koneksi internet lalu tekan "Coba Kirim Lagi". Jawabanmu tidak hilang.');
+    btn.disabled=false;btn.textContent='Coba Kirim Lagi';
+  }finally{
+    clearTimeout(timer);
+  }
+}
+
+function showThanks(demo){
+  $('app').classList.add('hidden');
+  const r=$('result');r.classList.remove('hidden');
+  r.innerHTML=`
+    <div class="thanks">
+      <div class="check">✓</div>
+      <h2>Terima kasih, ${esc(state.profile.nama)}!</h2>
+      <p class="sub">${demo
+        ?'Mode demo: SCRIPT_URL belum diisi, jadi jawaban belum dikirim ke Google Sheets.'
+        :'Jawaban tesmu sudah kami terima. Kamu boleh menutup halaman ini.'}</p>
+    </div>`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+render();
+</script>
+</body>
+</html>
